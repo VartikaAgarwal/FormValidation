@@ -17,6 +17,8 @@ class FormComponent extends React.Component {
       emailAddress: "",
       password: "",
       passwordConfirmation: "",
+      showPassword: false,
+      showPasswordConfirmation: false,
       countryCode: "+91",
       phoneNo: "",
       country: "",
@@ -78,6 +80,16 @@ class FormComponent extends React.Component {
 
     this.setState({ isFormSubmitted: isValid });
   }
+
+  toggleShowPassword = () => {
+    this.setState((prevState) => ({ showPassword: !prevState.showPassword }));
+  };
+
+  toggleShowPasswordConfirmation = () => {
+    this.setState((prevState) => ({
+      showPasswordConfirmation: !prevState.showPasswordConfirmation,
+    }));
+  };
 
   validateField(name) {
     let isValid = false;
@@ -308,29 +320,59 @@ class FormComponent extends React.Component {
               <div className="errorMsg">{this.state.emailAddressError}</div>
             )}
 
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-              autoComplete="off"
-            />
+            <div className="password-container">
+              <input
+                type={this.state.showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                onBlur={this.handleBlur}
+                autoComplete="off"
+                style={{ paddingRight: "40px" }}
+              />
+              <button
+                type="button"
+                className="password-toggle-icon"
+                onClick={this.toggleShowPassword}
+              >
+                <i
+                  className={`fa ${
+                    this.state.showPassword ? "fa-eye-slash" : "fa-eye"
+                  }`}
+                ></i>
+              </button>
+            </div>
             <br />
             {this.state.passwordError && (
               <div className="errorMsg">{this.state.passwordError}</div>
             )}
 
-            <input
-              type="password"
-              name="passwordConfirmation"
-              placeholder="Confirm Password"
-              value={this.state.passwordConfirmation}
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-              autoComplete="off"
-            />
+            <div className="password-container">
+              <input
+                type={this.state.showPasswordConfirmation ? "text" : "password"}
+                name="passwordConfirmation"
+                placeholder="Confirm Password"
+                value={this.state.passwordConfirmation}
+                onChange={this.handleChange}
+                onBlur={this.handleBlur}
+                autoComplete="off"
+                style={{ paddingRight: "40px" }}
+              />
+              <button
+                type="button"
+                className="password-toggle-icon"
+                onClick={this.toggleShowPasswordConfirmation}
+              >
+                <i
+                  className={`fa ${
+                    this.state.showPasswordConfirmation
+                      ? "fa-eye-slash"
+                      : "fa-eye"
+                  }`}
+                ></i>
+              </button>
+            </div>
             <br />
             {this.state.passwordConfirmationError && (
               <div className="errorMsg">
@@ -370,7 +412,8 @@ class FormComponent extends React.Component {
               <div className="errorMsg">{this.state.PhoneNoError}</div>
             )}
 
-            <select className="country-select"
+            <select
+              className="country-select"
               name="country"
               value={this.state.country}
               onChange={this.handleChange}
@@ -386,7 +429,8 @@ class FormComponent extends React.Component {
               <div className="errorMsg">{this.state.countryError}</div>
             )}
 
-            <select className="city-select"
+            <select
+              className="city-select"
               name="city"
               value={this.state.city}
               onChange={this.handleChange}

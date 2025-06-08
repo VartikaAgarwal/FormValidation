@@ -405,7 +405,7 @@ class FormComponent extends React.Component {
             <input
               type="text"
               name="panNo"
-              placeholder="PAN Number"
+              placeholder="Pan Number"
               value={this.state.panNo}
               onChange={this.handleChange}
               onBlur={this.handleBlur}

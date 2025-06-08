@@ -63,6 +63,10 @@ button {
   border: #ddd;
 }
 
+button:hover {
+    background-color: #8b5aa3;
+}
+
 h3 {
   margin: 5px;
   padding: 15px 15px 0px 15px;
